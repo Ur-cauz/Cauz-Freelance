@@ -1,0 +1,49 @@
+{
+  "name": "Cauz",
+  "role": "Developer & electrical engineering student",
+  "headline": "I make useful things feel like magic.",
+  "intro": "Hey, I’m Cauz. I build websites, playful tools, and systems that make a little more room for good ideas.",
+  "about": "I like figuring things out by building them. Some days that means a web app, other days it means staring at a schematic, fixing a stubborn bug, or trying to make a board do exactly what I told it to do. I’m still learning, but I’m very much in the habit of making things real.",
+  "now": "Currently tinkering with web tools, automation experiments, and anything that makes everyday work feel less repetitive.",
+  "email": "urcauzz@gmail.com",
+  "socials": [
+    { "label": "GitHub", "href": "https://github.com/Ur-cauz" },
+    { "label": "Email", "href": "mailto:urcauzz@gmail.com" }
+  ],
+  "services": [
+    {
+      "title": "Websites & web apps",
+      "note": "Interfaces that stay light and responsive.",
+      "items": ["Next.js", "React", "TypeScript", "Tailwind CSS"]
+    },
+    {
+      "title": "Backends & integrations",
+      "note": "Practical server logic and integrations.",
+      "items": ["Route handlers", "Webhooks", "Node.js", "Auth flows"]
+    },
+    {
+      "title": "Automation & bots",
+      "note": "Small systems that remove repetition.",
+      "items": ["Discord bots", "Telegram bots", "Cron tasks", "Browser automation"]
+    },
+    {
+      "title": "Hardware & embedded",
+      "note": "From the first rough sketch to a board that actually works.",
+      "items": ["PCB design", "Schematics", "ESP32", "Embedded C/C++"]
+    }
+  ],
+  "process": [
+    { "title": "Tell me what you need", "copy": "A few lines in the form below is plenty: the problem, who it is for, and any deadline." },
+    { "title": "We talk it through", "copy": "I reply by email, and if it helps we set up a short call to pin down scope." },
+    { "title": "I build it", "copy": "Find the real friction, then turn it into something people genuinely enjoy using." }
+  ],
+  "contactServices": ["Website", "Web app", "Automation or bot", "Hardware or embedded", "Something else"],
+  "footerNote": "Man idk why i built this, but here you go. Hope this does the work well. >''< :p",
+  "seo": {
+    "title": "Cauz | Developer and Electrical Engineering Student",
+    "description": "pfftttt click on it to view ig >''<",
+    "url": "https://cauz.is-a.dev",
+    "ogImage": "https://i.ibb.co/4RM4G8cD/cauzsfjasdhkashgajkshgjaks.jpg",
+    "ogImageAlt": "Cauz — developer and electrical engineering student"
+  }
+}

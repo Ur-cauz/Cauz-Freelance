@@ -16,3 +16,7 @@ pnpm-debug.log*
 
 # local tooling artifacts
 .codex
+
+# runtime data (never commit: may contain IPs / personal data)
+data/
+*.log
