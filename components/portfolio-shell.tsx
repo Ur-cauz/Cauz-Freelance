@@ -108,7 +108,7 @@ export function PortfolioShell({ data, content, testimonials }: PortfolioShellPr
         <p className="eyebrow">Got something brewing?</p>
         <h2>Let’s make it<br /><em>really good.</em></h2>
         <a className="contact-email" href={`mailto:${content.contactEmail}`}>{content.contactEmail} <span>↗</span></a>
-        <ContactForm />
+        <ContactForm services={["Website", "Web app", "Automation or bot", "Hardware or embedded", "Something else"]} email={content.contactEmail} />
         <div className="contact-footer"><span>{footerNote}</span><a href="https://github.com/Ur-cauz" target="_blank" rel="noreferrer">GitHub ↗</a><span>© {new Date().getFullYear()} Cauz</span></div>
       </section>
     </main>
