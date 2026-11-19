@@ -25,19 +25,25 @@ function validate(data: FormData): Errors {
 
 const input =
   "block w-full rounded-none border-0 border-b border-line bg-transparent px-0 py-3 text-base text-fg placeholder:text-muted/70 " +
-  "transition-colors focus:border-fg focus:outline-none focus:ring-0 aria-[invalid=true]:border-danger";
+  "transition-colors focus:border-accent focus:shadow-[0_1px_0_0_rgb(var(--accent))] focus:outline-none focus:ring-0 aria-[invalid=true]:border-danger";
 
 export function ContactForm({ services, email }: { services: string[]; email: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const [errors, setErrors] = useState<Errors>({});
   const startedAt = useRef(0);
-  const formRef = useRef<HTMLFormElement>(null);
   const statusRef = useRef<HTMLParagraphElement>(null);
 
+  // Set once per fresh form (mount, or "send another"), not on retries,
+  // so a quick retry after an error is not mistaken for a bot.
   useEffect(() => {
     startedAt.current = Date.now();
-  }, [status]);
+  }, []);
+
+  function reset() {
+    startedAt.current = Date.now();
+    setStatus("idle");
+  }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -83,7 +89,7 @@ export function ContactForm({ services, email }: { services: string[]; email: st
       <div role="status" className="border-t border-fg pt-6">
         <p className="text-2xl font-semibold tracking-tight">Got it, thanks.</p>
         <p className="mt-2 text-muted">I’ll reply to the email you gave, usually with a few questions or a time to talk.</p>
-        <button type="button" onClick={() => setStatus("idle")} className="link mt-6 text-sm font-medium">
+        <button type="button" onClick={reset} className="link mt-6 text-sm font-medium">
           Send another message
         </button>
       </div>
@@ -99,7 +105,7 @@ export function ContactForm({ services, email }: { services: string[]; email: st
     ) : null;
 
   return (
-    <form ref={formRef} onSubmit={submit} noValidate className="grid gap-6" aria-busy={status === "sending"}>
+    <form onSubmit={submit} noValidate className="grid gap-6" aria-busy={status === "sending"}>
       <div className="grid gap-6 sm:grid-cols-2">
         <label className="block">
           <span className="text-sm font-medium">Name</span>
