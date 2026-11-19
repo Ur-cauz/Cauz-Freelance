@@ -1,0 +1,29 @@
+/* Read-only viewer additions on top of the dashboard's styles.css (copied verbatim). */
+.view-only { gap: 6px; color: var(--accent); border-color: var(--accent); background: transparent; font-weight: 600; letter-spacing: 0.04em; }
+.view-only .i { width: 14px; height: 14px; }
+.live { display: inline-flex; align-items: center; gap: 7px; margin-right: 6px; font-size: 13px; color: var(--text-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.live .led { width: 8px; height: 8px; }
+.live[data-state="ok"] .led { background: var(--run); border-color: var(--run); }
+.live[data-state="stale"] { color: var(--warn); }
+.live[data-state="stale"] .led { background: var(--warn-fill); border-color: var(--warn); }
+.live[data-state="err"] { color: var(--crit); }
+.live[data-state="err"] .led { background: var(--crit-fill); border-color: var(--crit); }
+.offline-banner { display: flex; align-items: center; gap: 10px; margin: var(--s4) var(--s5) 0; padding: 10px 14px; border: 1px solid var(--warn); border-left: 4px solid var(--warn-fill); border-radius: var(--r-md); background: var(--warn-bg); font-size: 14px; font-weight: 600; }
+.offline-banner[data-tone="err"] { border-color: var(--crit); border-left-color: var(--crit-fill); background: var(--crit-bg); }
+.offline-banner .i { flex: none; }
+.offline-banner .sub { font-weight: 400; color: var(--text-2); }
+.powered { margin: 4px 0 0; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.site-foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; padding: var(--s4) var(--s5); border-top: 1px solid var(--line); font-size: 13px; color: var(--text-2); }
+.site-foot > span:first-child { font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; }
+.drawer-tabs[hidden] + .drawer-body { border-top: 0; }
+@media (max-width: 639px) {
+  .live { margin-right: 0; font-size: 12px; }
+  .live-long { display: none; }
+  .offline-banner { margin: var(--s3) var(--s4) 0; }
+  .site-foot { padding: var(--s4); }
+  .topbar { gap: var(--s2); padding-right: var(--s2); }
+  .crumbs { display: none; }
+  .topbar-actions { margin-left: auto; gap: 2px; }
+  .view-only { padding: 0 6px; font-size: 12px; }
+  .topbar .icon-btn { width: 40px; }
+}
