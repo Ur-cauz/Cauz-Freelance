@@ -1,7 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createLead } from "@/lib/leads";
+import { NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
-  try { return NextResponse.json(await createLead(await request.json()), { status: 201 }); }
-  catch (error) { return NextResponse.json({ error: error instanceof Error ? error.message : "Could not send message." }, { status: 400 }); }
+// Temporarily disabled while lead delivery moves from MongoDB to Discord.
+export async function POST() {
+  return NextResponse.json({ error: "Contact form is temporarily unavailable." }, { status: 503 });
 }

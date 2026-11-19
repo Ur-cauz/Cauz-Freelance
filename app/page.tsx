@@ -1,12 +1,7 @@
 import { PortfolioShell } from "@/components/portfolio-shell";
 import { portfolioData } from "@/lib/portfolio-data";
-import { getProjects } from "@/lib/projects";
-import { getSiteContent } from "@/lib/site-content";
-import { getTestimonials } from "@/lib/testimonials";
+import { projects, site, testimonials } from "@/lib/content";
 
-export const dynamic = "force-dynamic";
-
-export default async function HomePage() {
-  const [projects, content, testimonials] = await Promise.all([getProjects(), getSiteContent(), getTestimonials()]);
-  return <PortfolioShell data={{ ...portfolioData, projects }} content={content} testimonials={testimonials} />;
+export default function HomePage() {
+  return <PortfolioShell data={{ ...portfolioData, projects: projects.map((p) => ({ ...p, live: p.live ?? p.github ?? "", github: p.github ?? "" })) }} content={{ now: site.now, caseStudyTitle: "The interesting problems are usually hiding in plain sight.", caseStudyCopy: site.process[2].copy, contactEmail: site.email }} testimonials={testimonials.map((t) => ({ ...t, role: t.role ?? "" }))} />;
 }

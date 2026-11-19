@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import type { Testimonial } from "@/lib/testimonials";
+type Testimonial = { quote: string; name: string; role: string };
 
 export function TestimonialRail({ testimonials }: { testimonials: Testimonial[] }) {
   if (!testimonials.length) return null;

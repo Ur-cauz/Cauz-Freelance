@@ -7,8 +7,8 @@ import type { PortfolioData } from "@/lib/portfolio-data";
 import { aboutCopy, footerNote } from "@/lib/portfolio-data";
 import { CustomCursor } from "@/components/custom-cursor";
 import { AutoProjectRail } from "@/components/auto-project-rail";
-import type { SiteContent } from "@/lib/site-content";
-import type { Testimonial } from "@/lib/testimonials";
+type SiteContent = { now: string; caseStudyTitle: string; caseStudyCopy: string; contactEmail: string };
+type Testimonial = { quote: string; name: string; role: string };
 import { TestimonialRail } from "@/components/testimonial-rail";
 import { ContactForm } from "@/components/contact-form";
 
