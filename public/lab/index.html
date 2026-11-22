@@ -5,30 +5,166 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <meta name="referrer" content="no-referrer">
-  <meta name="description" content="Read-only live view of the CAUZ LAB homelab: containers, services, host stats, migration, backups and alerts.">
-  <title>CAUZ LAB · Live view</title>
+  <title>Cauz Lab: a self-hosted homelab with live status</title>
+  <meta name="description" content="Cauz Lab is a self-hosted homelab run by Ayaan: media streaming, cloud storage, DNS filtering and game servers on hardware at home. Watch it live, and ask about hosting your own service.">
+  <link rel="canonical" href="https://cauz.is-a.dev/lab">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Cauz Lab">
+  <meta property="og:title" content="Cauz Lab: a self-hosted homelab with live status">
+  <meta property="og:description" content="Media, cloud storage, DNS and game servers running 24/7 from a home lab. Live, read-only status, and hosting for your own projects.">
+  <meta property="og:url" content="https://cauz.is-a.dev/lab">
+  <meta property="og:image" content="https://cauz.is-a.dev/lab/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Cauz Lab: live homelab status, containers online, CPU and memory gauges">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Cauz Lab: a self-hosted homelab with live status">
+  <meta name="twitter:description" content="Media, cloud storage, DNS and game servers running 24/7 from a home lab. Host your own service with us.">
+  <meta name="twitter:image" content="https://cauz.is-a.dev/lab/og.png">
+  <meta name="theme-color" content="#121518">
   <link rel="icon" type="image/svg+xml" href="/lab/favicon.svg">
   <link rel="stylesheet" href="/lab/styles.css">
   <script src="/lab/app.js" defer></script>
 </head>
 <body>
-  <a class="skip-link" href="#view">Skip to content</a>
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <header class="top">
-    <div class="top-in">
-      <a class="brand" href="/lab"><span class="brand-name">CAUZ LAB</span><span class="brand-sub">Live view</span></a>
+    <div class="wrap top-in">
+      <a class="brand" href="#top" aria-label="Cauz Lab, back to top">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="5" class="bm-bg"/><path d="M7 25V13l9-6 9 6v12M12 25v-7h8v7M7 25h18" class="bm-line"/><circle cx="24" cy="8" r="3" class="bm-dot"/></svg>
+        <span class="brand-text"><span class="brand-name">CAUZ LAB</span><span class="brand-sub">Live view</span></span>
+      </a>
+      <nav class="nav" aria-label="Page sections">
+        <a href="#runs">What runs here</a>
+        <a href="#specs">Hardware</a>
+        <a href="#status">Status</a>
+      </nav>
       <div class="top-actions">
-        <span class="live" id="live" data-state="unknown"><span class="led"></span><span id="live-text">Connecting…</span></span>
-        <span class="badge">View only</span>
-        <button class="btn" type="button" id="theme-btn" aria-label="Switch colour theme">Theme</button>
+        <button class="icon-btn" type="button" id="theme-btn" aria-label="Switch colour theme" title="Switch colour theme"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M5.2 18.8l1.6-1.6M17.2 6.8l1.6-1.6"/></svg></button>
+        <a class="btn btn-primary" href="/?topic=hosting&amp;source=lab#contact">Host with us</a>
       </div>
     </div>
-    <div class="alarmbar" id="alarmbar" data-state="unknown" role="status" aria-live="polite"><span class="sev"></span><span id="alarm-msg">Reading alarm state…</span></div>
   </header>
+
   <div class="banner" id="banner" role="status" hidden></div>
-  <main class="content" id="view" tabindex="-1">
-    <p class="muted">Loading…</p>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Self-hosted homelab</p>
+          <h1 id="hero-title">Cauz Lab</h1>
+          <p class="lede">A homelab run by Ayaan. Movies, files, passwords, DNS and game servers run on hardware at home, around the clock. This page is a live, read-only window into it.</p>
+          <div class="pulse-row">
+            <span class="pulse" id="pulse" data-state="unknown"><span class="pulse-dot" aria-hidden="true"></span><span id="pulse-text">Checking…</span></span>
+            <span class="meta num" id="uptime-text"></span>
+          </div>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="/?topic=hosting&amp;source=lab#contact">Host your service</a>
+            <a class="btn btn-lg" href="#runs">See what runs here</a>
+          </div>
+          <dl class="hero-stats">
+            <div><dt>Containers up</dt><dd class="num" id="hs-containers">–</dd></div>
+            <div><dt>Services ok</dt><dd class="num" id="hs-services">–</dd></div>
+            <div><dt>Updated</dt><dd class="num" id="hs-updated">–</dd></div>
+          </dl>
+        </div>
+        <section class="panel gauges-panel" aria-labelledby="gauges-title">
+          <h2 class="panel-h" id="gauges-title"><span>Live host load</span><span class="h-note" id="live-note">Connecting…</span></h2>
+          <div class="gauges" id="gauges">
+            <figure class="gauge" data-key="cpu"><div class="gauge-dial"></div><figcaption><span class="eng-label">CPU</span><span class="gauge-cap">&nbsp;</span></figcaption></figure>
+            <figure class="gauge" data-key="mem"><div class="gauge-dial"></div><figcaption><span class="eng-label">Memory</span><span class="gauge-cap">&nbsp;</span></figcaption></figure>
+            <figure class="gauge" data-key="disk"><div class="gauge-dial"></div><figcaption><span class="eng-label">Storage</span><span class="gauge-cap">&nbsp;</span></figcaption></figure>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="strip-wrap" id="status" aria-labelledby="status-title">
+      <div class="wrap">
+        <h2 class="sec-title" id="status-title">Live status</h2>
+        <div class="strip" id="strip">
+          <div class="tile" data-key="alerts"><span class="eng-label">Alerts</span><strong class="tile-v">–</strong><span class="tile-s">Reading…</span></div>
+          <div class="tile" data-key="backup"><span class="eng-label">Backups</span><strong class="tile-v">–</strong><span class="tile-s">Reading…</span></div>
+          <div class="tile" data-key="sync"><span class="eng-label">Cloud sync</span><strong class="tile-v">–</strong><span class="tile-s">Reading…</span></div>
+          <div class="tile" data-key="streams"><span class="eng-label">Streaming now</span><strong class="tile-v">–</strong><span class="tile-s">Reading…</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="runs" aria-labelledby="runs-title">
+      <div class="wrap">
+        <h2 class="sec-title" id="runs-title">What runs here</h2>
+        <p class="sec-lede">Everything below is a real service running on the lab right now. The dot shows whether it is up.</p>
+        <div class="svc-grid" id="svc-grid">
+          <article class="svc" data-group="media"><div class="svc-h"><h3>Media streaming</h3><span class="dot" data-s="unknown"></span></div><p>Private movie and TV streaming with request, library and subtitle tools.</p><p class="svc-meta num">–</p><ul class="chips"></ul></article>
+          <article class="svc" data-group="cloud"><div class="svc-h"><h3>Cloud storage and passwords</h3><span class="dot" data-s="unknown"></span></div><p>Self-hosted file sync and a password vault, backed by databases that stay private.</p><p class="svc-meta num">–</p><ul class="chips"></ul></article>
+          <article class="svc" data-group="dns"><div class="svc-h"><h3>DNS and ad-blocking</h3><span class="dot" data-s="unknown"></span></div><p>Network-wide DNS filtering that blocks ads and trackers for every device at home.</p><p class="svc-meta num">–</p><ul class="chips"></ul></article>
+          <article class="svc" data-group="monitor"><div class="svc-h"><h3>Monitoring and security</h3><span class="dot" data-s="unknown"></span></div><p>Metrics, alerting and a security sentinel watch the lab 24/7 and raise the alarm early.</p><p class="svc-meta num">–</p><ul class="chips"></ul></article>
+          <article class="svc" data-group="auto"><div class="svc-h"><h3>Automation</h3><span class="dot" data-s="unknown"></span></div><p>A rules engine, chat-ops bot and update notifier handle the routine jobs.</p><p class="svc-meta num">–</p><ul class="chips"></ul></article>
+          <article class="svc" data-group="games"><div class="svc-h"><h3>Game servers</h3><span class="dot" data-s="unknown"></span></div><p>A community game server with its own public tunnel.</p><p class="svc-meta num">–</p><ul class="chips"></ul></article>
+          <article class="svc" data-group="platform"><div class="svc-h"><h3>Platform and networking</h3><span class="dot" data-s="unknown"></span></div><p>The gateway, tunnel and control center that tie the lab together and keep it safe.</p><p class="svc-meta num">–</p><ul class="chips"></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="specs" aria-labelledby="specs-title">
+      <div class="wrap two-col">
+        <section class="panel" aria-labelledby="specs-title">
+          <h2 class="panel-h" id="specs-title"><span>Hardware</span><span class="h-note">one machine, always on</span></h2>
+          <dl class="specs">
+            <div><dt>Processor</dt><dd>AMD Ryzen 5 5600G, 6 cores / 12 threads</dd></div>
+            <div><dt>Memory</dt><dd id="sp-mem">–</dd></div>
+            <div><dt>Storage</dt><dd id="sp-disk">–</dd></div>
+            <div><dt>Network</dt><dd>Wired home connection. Public access goes only through an outbound encrypted tunnel, so no ports are opened to the internet.</dd></div>
+            <div><dt>Running for</dt><dd class="num" id="sp-up">–</dd></div>
+          </dl>
+        </section>
+        <section class="panel" aria-labelledby="built-title">
+          <h2 class="panel-h" id="built-title"><span>How it is built</span></h2>
+          <ul class="built">
+            <li><strong>Containerised.</strong> Every service runs in its own Docker container, so one failure stays contained and updates are routine.</li>
+            <li><strong>Backed up daily.</strong> Automatic backups run every night and a restore test proves they actually work.</li>
+            <li><strong>Separate copies.</strong> Backups are also copied to USB drives that live apart from the server.</li>
+            <li><strong>Watched 24/7.</strong> Metrics and alerts notify the owner as soon as something looks wrong.</li>
+            <li><strong>Private by design.</strong> Admin tools are not on the public internet, and this page shows names and numbers only.</li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <section class="section cta" id="host" aria-labelledby="host-title">
+      <div class="wrap cta-grid">
+        <div>
+          <p class="eyebrow">Hosting</p>
+          <h2 id="host-title">Host your service on Cauz Lab</h2>
+          <p class="sec-lede">Have a project that needs a home? Ayaan can run it alongside the lab, with backups and monitoring included. Tell him what you have and what you need, and he will say whether it fits.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="/?topic=hosting&amp;source=lab#contact">Ask about hosting</a>
+            <a class="btn btn-lg" href="mailto:urcauzz@gmail.com?subject=Hosting%20on%20Cauz%20Lab">Email instead</a>
+          </div>
+          <p class="fine">Home-hosted and run by one person, so talk it through first. Not a data centre.</p>
+        </div>
+        <ul class="can-host" aria-label="What can be hosted">
+          <li><strong>Websites and web apps</strong><span>Static sites, Next.js and Node apps</span></li>
+          <li><strong>Bots and automations</strong><span>Discord and Telegram bots, scheduled jobs</span></li>
+          <li><strong>Databases</strong><span>PostgreSQL and Redis for your project</span></li>
+          <li><strong>Game servers</strong><span>Minecraft and other community servers</span></li>
+          <li><strong>Media and files</strong><span>Streaming libraries and file sync</span></li>
+        </ul>
+      </div>
+    </section>
   </main>
-  <footer class="foot"><span>Powered by CAUZ LAB</span><span class="muted">Read-only snapshot · no control access · refreshes every minute</span></footer>
-  <noscript><p class="muted pad">This page needs JavaScript to show live data.</p></noscript>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <span class="foot-brand">Cauz Lab</span>
+      <span class="muted">Read-only snapshot. No control access. No IP addresses, paths or accounts are shown. Refreshes every minute.</span>
+      <a href="/">Portfolio</a>
+    </div>
+  </footer>
+  <noscript><p class="wrap muted pad">Live numbers need JavaScript. The lab is still running.</p></noscript>
 </body>
 </html>

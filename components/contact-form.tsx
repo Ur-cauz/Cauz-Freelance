@@ -40,6 +40,14 @@ export function ContactForm({ services, email }: { services: string[]; email: st
     startedAt.current = Date.now();
   }, []);
 
+  // Deep link from /lab: /?topic=hosting&source=lab#contact preselects the hosting topic.
+  const serviceRef = useRef<HTMLSelectElement>(null);
+  useEffect(() => {
+    const topic = new URLSearchParams(window.location.search).get("topic");
+    const wanted = topic === "hosting" ? "Hosting on Cauz Lab" : null;
+    if (wanted && serviceRef.current && services.includes(wanted)) serviceRef.current.value = wanted;
+  }, [services]);
+
   function reset() {
     startedAt.current = Date.now();
     setStatus("idle");
@@ -121,7 +129,7 @@ export function ContactForm({ services, email }: { services: string[]; email: st
 
       <label className="block">
         <span className="text-sm font-medium">What do you need?</span>
-        <select name="service" defaultValue="" required className={`${input} cursor-pointer`} {...describe("service")}>
+        <select ref={serviceRef} name="service" defaultValue="" required className={`${input} cursor-pointer`} {...describe("service")}>
           <option value="" disabled>
             Choose one
           </option>

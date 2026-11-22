@@ -37,7 +37,7 @@
     { "title": "We talk it through", "copy": "I reply by email, and if it helps we set up a short call to pin down scope." },
     { "title": "I build it", "copy": "Find the real friction, then turn it into something people genuinely enjoy using." }
   ],
-  "contactServices": ["Website", "Web app", "Automation or bot", "Hardware or embedded", "Something else"],
+  "contactServices": ["Website", "Web app", "Automation or bot", "Hardware or embedded", "Hosting on Cauz Lab", "Something else"],
   "footerNote": "Man idk why i built this, but here you go. Hope this does the work well. >''< :p",
   "seo": {
     "title": "Cauz | Developer and Electrical Engineering Student",
