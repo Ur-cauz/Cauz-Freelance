@@ -5,95 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="dark light">
   <meta name="referrer" content="no-referrer">
-  <meta name="description" content="Read-only live view of the CAUZ LAB homelab: service states, host telemetry, alarms and network topology.">
+  <meta name="description" content="Read-only live view of the CAUZ LAB homelab: containers, services, host stats, migration, backups and alerts.">
   <title>CAUZ LAB · Live view</title>
   <link rel="icon" type="image/svg+xml" href="/lab/favicon.svg">
   <link rel="stylesheet" href="/lab/styles.css">
-  <link rel="stylesheet" href="/lab/viewer.css">
-  <!-- Synchronous so the stored theme applies before first paint; init waits for DOMContentLoaded. -->
-  <script src="/lab/app.js"></script>
-  <script src="/lab/topology.js"></script>
+  <script src="/lab/app.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#view">Skip to content</a>
-
-  <div class="shell" id="app-view">
-    <div class="nav-backdrop" data-action="nav-close" hidden></div>
-    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
-      <div class="sidebar-head">
-        <a class="brand" href="#/overview">
-          <span class="brand-mark" data-icon="logo"></span>
-          <span class="brand-text"><span class="brand-name">CAUZ LAB</span><span class="brand-sub">Live view</span></span>
-        </a>
-        <button class="icon-btn only-mobile" type="button" data-action="nav-close" aria-label="Close navigation"><span data-icon="x"></span></button>
+  <header class="top">
+    <div class="top-in">
+      <a class="brand" href="/lab"><span class="brand-name">CAUZ LAB</span><span class="brand-sub">Live view</span></a>
+      <div class="top-actions">
+        <span class="live" id="live" data-state="unknown"><span class="led"></span><span id="live-text">Connecting…</span></span>
+        <span class="badge">View only</span>
+        <button class="btn" type="button" id="theme-btn" aria-label="Switch colour theme">Theme</button>
       </div>
-      <nav class="nav">
-        <div class="nav-group">
-          <div class="nav-group-label">Monitor</div>
-          <a class="nav-link" href="#/overview" data-nav="overview"><span data-icon="grid"></span><span>Plant overview</span></a>
-          <a class="nav-link" href="#/alarms" data-nav="alarms"><span data-icon="bell"></span><span>Alarms</span><span class="nav-count" id="nav-alarms" hidden></span></a>
-          <a class="nav-link" href="#/topology" data-nav="topology"><span data-icon="network"></span><span>Topology</span></a>
-        </div>
-        <div class="nav-group">
-          <div class="nav-group-label">Plant</div>
-          <a class="nav-link" href="#/containers" data-nav="containers"><span data-icon="box"></span><span>Containers</span></a>
-          <a class="nav-link" href="#/stacks" data-nav="stacks"><span data-icon="layers"></span><span>Stacks</span></a>
-          <a class="nav-link" href="#/apps" data-nav="apps"><span data-icon="code"></span><span>Apps</span></a>
-        </div>
-      </nav>
-      <div class="sidebar-foot">
-        <div class="host-line">
-          <span class="eng-label">Access</span>
-          <span class="badge view-only"><span data-icon="eye"></span>View only</span>
-        </div>
-        <div class="host-line">
-          <span class="eng-label">Feed</span>
-          <span class="comms" id="comms" data-state="unknown"><span class="led"></span><span id="comms-text">Connecting</span></span>
-        </div>
-        <p class="powered">Powered by CAUZ LAB</p>
-      </div>
-    </aside>
-
-    <div class="main">
-      <header class="top">
-        <section class="alarmbar" id="alarmbar" aria-label="Alarm summary" data-state="unknown">
-          <a class="alarm-count" href="#/alarms?sev=crit" data-sev="crit" id="ac-crit"><span class="sev-shape" aria-hidden="true"></span><span class="ac-n num">–</span><span class="ac-l">Critical</span></a>
-          <a class="alarm-count" href="#/alarms?sev=warn" data-sev="warn" id="ac-warn"><span class="sev-shape" aria-hidden="true"></span><span class="ac-n num">–</span><span class="ac-l">Warning</span></a>
-          <a class="alarm-count" href="#/alarms?sev=info" data-sev="info" id="ac-info"><span class="sev-shape" aria-hidden="true"></span><span class="ac-n num">–</span><span class="ac-l">Info</span></a>
-          <p class="alarm-msg" id="alarm-msg" aria-live="polite" aria-atomic="true">Reading alarm state…</p>
-          <span class="alarm-clock num" id="alarm-clock" aria-hidden="true"></span>
-        </section>
-        <div class="topbar">
-          <button class="icon-btn only-mobile" type="button" data-action="nav-open" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false" id="nav-toggle"><span data-icon="menu"></span></button>
-          <nav class="crumbs" aria-label="Breadcrumb"><ol id="crumbs"></ol></nav>
-          <div class="topbar-actions">
-            <span class="live" id="live" data-state="unknown" aria-live="off"><span class="led"></span><span id="live-text">Connecting…</span></span>
-            <span class="badge view-only only-wide"><span data-icon="eye"></span>View only</span>
-            <button class="icon-btn" type="button" data-action="refresh" aria-label="Check for new data" id="refresh-btn"><span data-icon="refresh"></span></button>
-            <button class="icon-btn" type="button" data-action="theme" aria-label="Switch to day mode" id="theme-btn"><span data-icon="sun"></span></button>
-          </div>
-        </div>
-      </header>
-      <div class="offline-banner" id="offline" role="status" hidden></div>
-      <main class="content" id="view" tabindex="-1"></main>
-      <footer class="site-foot"><span>Powered by CAUZ LAB</span><span class="muted">Read-only snapshot · no control access · data refreshes every minute</span></footer>
     </div>
-  </div>
-
-  <!-- Detail drawer (read-only) -->
-  <dialog class="drawer" id="drawer" aria-labelledby="drawer-title">
-    <div class="drawer-inner">
-      <div class="drawer-head">
-        <div class="drawer-titles">
-          <p class="eng-label" id="drawer-kicker"></p>
-          <h2 class="drawer-title" id="drawer-title"></h2>
-          <div class="chips" id="drawer-chips"></div>
-        </div>
-        <button class="icon-btn" type="button" data-action="drawer-close" aria-label="Close panel"><span data-icon="x"></span></button>
-      </div>
-      <div class="tabs drawer-tabs" id="drawer-tabs" role="tablist"></div>
-      <div class="drawer-body" id="drawer-body" role="tabpanel" tabindex="0"></div>
-    </div>
-  </dialog>
+    <div class="alarmbar" id="alarmbar" data-state="unknown" role="status" aria-live="polite"><span class="sev"></span><span id="alarm-msg">Reading alarm state…</span></div>
+  </header>
+  <div class="banner" id="banner" role="status" hidden></div>
+  <main class="content" id="view" tabindex="-1">
+    <p class="muted">Loading…</p>
+  </main>
+  <footer class="foot"><span>Powered by CAUZ LAB</span><span class="muted">Read-only snapshot · no control access · refreshes every minute</span></footer>
+  <noscript><p class="muted pad">This page needs JavaScript to show live data.</p></noscript>
 </body>
 </html>
