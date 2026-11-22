@@ -1,116 +1,217 @@
-/* CAUZ design tokens, shared by the portfolio (/) and the live lab page (/lab).
- * Same palette as the homelab control panel. Night mode is the default; day mode follows the OS
- * or [data-theme=light]. */
+/* CAUZ shared design tokens: the Beszel hub look (stats.cauz.duckdns.org) with the CAUZ liquid-glass layer on top.
+ *
+ * Values are Beszel's own shadcn tokens (hub CSS: --background, --card, --primary, --radius .8rem, Inter stack),
+ * overridden by the glass values from infrastructure/beszel/glass.css, so a page using this file looks like the
+ * hub as users see it. Names are Beszel's (shadcn) so the two stay interchangeable.
+ *
+ * Theme selection (first match wins):
+ *   <html data-theme="light|dark">   explicit choice (dashboard toggle)
+ *   <html class="light|dark">        what the Beszel hub sets (lets glass.css load this file as-is, see below)
+ *   prefers-color-scheme: light      OS preference when nothing explicit is set; otherwise dark.
+ *
+ * Sharing with glass.css later: glass.css currently repeats these values inside html.light / html.dark. It can drop
+ * those two blocks and `@import "/_cauz/tokens.css"` (Caddy serves infrastructure/beszel/ at /_cauz/ already), keeping
+ * only the Beszel-class selectors. Nothing here uses hashed class names or the dashboard's own selectors.
+ * CSP: style-src 'self' only, so this is a plain file, no inline style, no remote fonts.
+ */
 
+/* ---------- dark (default) ---------- */
 :root {
-  color-scheme: dark;
-  --bg: #121518;
-  --bg-2: #0e1113;
-  --panel: #191d21;
-  --panel-2: #1f2429;
-  --panel-3: #262c32;
-  --inset: #0f1215;
-  --line: #2b3238;
-  --line-strong: #3b444c;
-  --text: #dde2e7;
-  --text-2: #aab3bb;
-  --text-3: #8d97a0;
-  --accent: #8cc1e8;
-  --accent-strong: #b3d6f0;
-  --primary-bg: #2d5f86;
-  --primary-bg-hover: #36709c;
-  --primary-fg: #ffffff;
-  --focus: #7dc4ff;
-  --run: #3fcf7d;
-  --crit: #ff6b6b;
-  --crit-fill: #c62828;
-  --crit-fill-fg: #ffffff;
-  --crit-bg: rgba(229, 72, 77, 0.14);
-  --warn: #f2b63c;
-  --warn-fill: #f0b429;
-  --warn-fill-fg: #1a1400;
-  --warn-bg: rgba(240, 180, 41, 0.12);
-  --info: #4fd1e8;
-  --info-fill: #2aa9c1;
-  --info-fill-fg: #001a20;
-  --info-bg: rgba(79, 209, 232, 0.11);
-  --ok-bg: rgba(63, 207, 125, 0.10);
-  --neutral-bg: rgba(255, 255, 255, 0.05);
-  --pipe: #4a545d;
-  --flow: #9fb3c4;
-  --gauge-track: #2a3137;
-  --gauge-val: #9aa8b5;
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 1px 2px rgba(0, 0, 0, 0.4);
-  --scrim: rgba(4, 6, 8, 0.66);
-  --skeleton: #20262b;
+	color-scheme: dark;
+	--radius: 0.8rem;
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-sm: calc(var(--radius) - 4px);
+	--font-sans: "Inter", "InterVariable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
 
-  --font: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
-  --mono: "JetBrains Mono", "SF Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+	/* Beszel shadcn tokens, dark + glass */
+	--background: #05070c;
+	--foreground: #eceef3;
+	--card: rgb(15 18 29 / 0.60);
+	--card-foreground: #eceef3;
+	--popover: rgb(11 14 23 / 0.84);
+	--popover-foreground: #eceef3;
+	--primary: #f5f5f5;
+	--primary-foreground: #18191b;
+	--primary-hover: #dcdce0;
+	--secondary: rgb(255 255 255 / 0.07);
+	--secondary-foreground: #fafafa;
+	--muted: rgb(255 255 255 / 0.055);
+	--muted-foreground: #a7adbb;
+	--accent: rgb(140 165 255 / 0.12);
+	--accent-foreground: #fafafa;
+	--destructive: #be2d2d;
+	--border: rgb(255 255 255 / 0.08);
+	--input: #7d8499;                         /* control border, >= 3:1 */
+	--ring: #a9bcff;                          /* focus ring, >= 3:1 */
+	--table-header: rgb(255 255 255 / 0.03);
+	--chart-1: #4d8dff;
+	--chart-2: #2eb88a;
+	--chart-3: #e88c30;
+	--chart-4: #af57db;
+	--chart-5: #e23670;
+	--link: #a9bcff;
+	--link-strong: #c9d5ff;
 
-  --r-sm: 2px;
-  --r-md: 3px;
-  --r-lg: 4px;
-  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
-  --sidebar-w: 236px;
-  --bar-h: 44px;
-  --topbar-h: 48px;
-  --ctl-h: 36px;
+	/* status colours (text + fill pairs, AA on the panels in each theme) */
+	--run: #3fcf7d;
+	--crit: #ff7b7b;
+	--crit-fill: #c62828;
+	--crit-fill-fg: #ffffff;
+	--crit-bg: rgb(229 72 77 / 0.16);
+	--warn: #f2b63c;
+	--warn-fill: #f0b429;
+	--warn-fill-fg: #1a1400;
+	--warn-bg: rgb(240 180 41 / 0.14);
+	--info: #4fd1e8;
+	--info-fill: #2aa9c1;
+	--info-fill-fg: #001a20;
+	--info-bg: rgb(79 209 232 / 0.12);
+	--ok-bg: rgb(63 207 125 / 0.12);
+	--meter-ok: #34c58e;
+	--meter-track: rgb(255 255 255 / 0.10);
+
+	/* glass layer */
+	--g-base: var(--background);
+	--g-blob-a: rgb(70 95 220 / 0.22);
+	--g-blob-b: rgb(160 70 200 / 0.13);
+	--g-blob-c: rgb(30 160 170 / 0.13);
+	--g-blob-d: rgb(220 120 70 / 0.06);
+	--g-hi: rgb(255 255 255 / 0.15);          /* specular top edge */
+	--g-rim: rgb(255 255 255 / 0.05);         /* inner border */
+	--g-edge: rgb(255 255 255 / 0.08);        /* outer hairline */
+	--g-shadow: rgb(0 0 0 / 0.60);
+	--g-sheen: rgb(255 255 255 / 0.05);
+	--g-field: rgb(255 255 255 / 0.045);
+	--scrim: rgb(0 0 0 / 0.62);
+
+	/* glass recipes (properties, so any selector set can apply them) */
+	--glass-filter: blur(20px) saturate(180%);
+	--glass-filter-strong: blur(32px) saturate(190%);
+	--glass-sheen: linear-gradient(180deg, var(--g-sheen), transparent 42%);
+	--glass-shadow: inset 0 1px 0 var(--g-hi), inset 0 0 0 1px var(--g-rim), 0 1px 2px var(--g-shadow), 0 12px 32px -12px var(--g-shadow);
+	--glass-shadow-strong: inset 0 1px 0 var(--g-hi), inset 0 0 0 1px var(--g-rim), 0 2px 6px var(--g-shadow), 0 28px 64px -16px var(--g-shadow);
 }
 
-:root[data-theme="light"] {
-  color-scheme: light;
-  --bg: #e6e9ec;
-  --bg-2: #dce0e4;
-  --panel: #f6f7f8;
-  --panel-2: #eef0f2;
-  --panel-3: #e3e7ea;
-  --inset: #ffffff;
-  --line: #c6cdd3;
-  --line-strong: #a9b2ba;
-  --text: #161b20;
-  --text-2: #3e4852;
-  --text-3: #56606a;
-  --accent: #1d5f8f;
-  --accent-strong: #134a72;
-  --primary-bg: #245a82;
-  --primary-bg-hover: #1c4a6c;
-  --primary-fg: #ffffff;
-  --focus: #1a6fb3;
-  --run: #1e8a4c;
-  --crit: #b3261e;
-  --crit-fill: #b3261e;
-  --crit-fill-fg: #ffffff;
-  --crit-bg: rgba(179, 38, 30, 0.09);
-  --warn: #8a5a00;
-  --warn-fill: #f0b429;
-  --warn-fill-fg: #1a1400;
-  --warn-bg: rgba(240, 180, 41, 0.18);
-  --info: #0a6f86;
-  --info-fill: #0a7d96;
-  --info-fill-fg: #ffffff;
-  --info-bg: rgba(10, 111, 134, 0.09);
-  --ok-bg: rgba(30, 138, 76, 0.09);
-  --neutral-bg: rgba(0, 0, 0, 0.04);
-  --pipe: #9aa4ad;
-  --flow: #4d6070;
-  --gauge-track: #d6dbe0;
-  --gauge-val: #5d6a76;
-  --shadow: 0 10px 30px rgba(20, 30, 40, 0.18), 0 1px 2px rgba(20, 30, 40, 0.12);
-  --scrim: rgba(30, 38, 46, 0.45);
-  --skeleton: #dfe3e7;
+/* ---------- light ---------- */
+:root[data-theme="light"],
+html.light {
+	color-scheme: light;
+	--background: #e8ecf6;
+	--foreground: #15171c;
+	--card: rgb(255 255 255 / 0.58);
+	--card-foreground: #15171c;
+	--popover: rgb(255 255 255 / 0.82);
+	--popover-foreground: #15171c;
+	--primary: #18181b;
+	--primary-foreground: #ffffff;
+	--primary-hover: #3f3f46;
+	--secondary: rgb(255 255 255 / 0.55);
+	--secondary-foreground: #18181b;
+	--muted: rgb(40 55 110 / 0.07);
+	--muted-foreground: #4a4f5c;
+	--accent: rgb(60 85 170 / 0.12);
+	--accent-foreground: #18181b;
+	--destructive: #c42b2b;
+	--border: rgb(30 40 80 / 0.12);
+	--input: #747b90;
+	--ring: #3550c8;
+	--table-header: rgb(255 255 255 / 0.35);
+	--chart-1: #2662d9;
+	--link: #2a43b0;
+	--link-strong: #1d3190;
+
+	--run: #167a43;
+	--crit: #b3261e;
+	--crit-fill: #b3261e;
+	--crit-bg: rgb(179 38 30 / 0.09);
+	--warn: #7a4f00;
+	--warn-bg: rgb(240 180 41 / 0.20);
+	--info: #0a6270;
+	--info-fill: #0a7d96;
+	--info-fill-fg: #ffffff;
+	--info-bg: rgb(10 111 134 / 0.09);
+	--ok-bg: rgb(22 122 67 / 0.09);
+	--meter-ok: #1f9d74;
+	--meter-track: rgb(40 55 110 / 0.14);
+
+	--g-base: #e8ecf6;
+	--g-blob-a: rgb(120 155 255 / 0.50);
+	--g-blob-b: rgb(255 170 205 / 0.40);
+	--g-blob-c: rgb(120 220 205 / 0.38);
+	--g-blob-d: rgb(255 205 140 / 0.32);
+	--g-hi: rgb(255 255 255 / 0.70);
+	--g-rim: rgb(255 255 255 / 0.35);
+	--g-edge: rgb(30 40 80 / 0.12);
+	--g-shadow: rgb(30 45 100 / 0.14);
+	--g-sheen: rgb(255 255 255 / 0.30);
+	--g-field: rgb(255 255 255 / 0.60);
+	--scrim: rgb(20 28 60 / 0.38);
 }
 @media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    color-scheme: light;
-    --bg: #e6e9ec; --bg-2: #dce0e4; --panel: #f6f7f8; --panel-2: #eef0f2; --panel-3: #e3e7ea; --inset: #ffffff;
-    --line: #c6cdd3; --line-strong: #a9b2ba; --text: #161b20; --text-2: #3e4852; --text-3: #56606a;
-    --accent: #1d5f8f; --accent-strong: #134a72; --primary-bg: #245a82; --primary-bg-hover: #1c4a6c; --primary-fg: #ffffff; --focus: #1a6fb3;
-    --run: #1e8a4c; --crit: #b3261e; --crit-fill: #b3261e; --crit-fill-fg: #ffffff; --crit-bg: rgba(179, 38, 30, 0.09);
-    --warn: #8a5a00; --warn-fill: #f0b429; --warn-fill-fg: #1a1400; --warn-bg: rgba(240, 180, 41, 0.18);
-    --info: #0a6f86; --info-fill: #0a7d96; --info-fill-fg: #ffffff; --info-bg: rgba(10, 111, 134, 0.09);
-    --ok-bg: rgba(30, 138, 76, 0.09); --neutral-bg: rgba(0, 0, 0, 0.04);
-    --pipe: #9aa4ad; --flow: #4d6070; --gauge-track: #d6dbe0; --gauge-val: #5d6a76;
-    --shadow: 0 10px 30px rgba(20, 30, 40, 0.18), 0 1px 2px rgba(20, 30, 40, 0.12);
-    --scrim: rgba(30, 38, 46, 0.45); --skeleton: #dfe3e7;
-  }
+	:root:not([data-theme]):not(.dark) {
+		color-scheme: light;
+		--background: #e8ecf6;
+		--foreground: #15171c;
+		--card: rgb(255 255 255 / 0.58);
+		--card-foreground: #15171c;
+		--popover: rgb(255 255 255 / 0.82);
+		--popover-foreground: #15171c;
+		--primary: #18181b;
+		--primary-foreground: #ffffff;
+		--primary-hover: #3f3f46;
+		--secondary: rgb(255 255 255 / 0.55);
+		--secondary-foreground: #18181b;
+		--muted: rgb(40 55 110 / 0.07);
+		--muted-foreground: #4a4f5c;
+		--accent: rgb(60 85 170 / 0.12);
+		--accent-foreground: #18181b;
+		--destructive: #c42b2b;
+		--border: rgb(30 40 80 / 0.12);
+		--input: #747b90;
+		--ring: #3550c8;
+		--table-header: rgb(255 255 255 / 0.35);
+		--chart-1: #2662d9;
+		--link: #2a43b0;
+		--link-strong: #1d3190;
+		--run: #167a43;
+		--crit: #b3261e;
+		--crit-fill: #b3261e;
+		--crit-bg: rgb(179 38 30 / 0.09);
+		--warn: #7a4f00;
+		--warn-bg: rgb(240 180 41 / 0.20);
+		--info: #0a6270;
+		--info-fill: #0a7d96;
+		--info-fill-fg: #ffffff;
+		--info-bg: rgb(10 111 134 / 0.09);
+		--ok-bg: rgb(22 122 67 / 0.09);
+		--meter-ok: #1f9d74;
+		--meter-track: rgb(40 55 110 / 0.14);
+		--g-base: #e8ecf6;
+		--g-blob-a: rgb(120 155 255 / 0.50);
+		--g-blob-b: rgb(255 170 205 / 0.40);
+		--g-blob-c: rgb(120 220 205 / 0.38);
+		--g-blob-d: rgb(255 205 140 / 0.32);
+		--g-hi: rgb(255 255 255 / 0.70);
+		--g-rim: rgb(255 255 255 / 0.35);
+		--g-edge: rgb(30 40 80 / 0.12);
+		--g-shadow: rgb(30 45 100 / 0.14);
+		--g-sheen: rgb(255 255 255 / 0.30);
+		--g-field: rgb(255 255 255 / 0.60);
+		--scrim: rgb(20 28 60 / 0.38);
+	}
+}
+/* explicit .dark / data-theme=dark need nothing: the :root block above is the dark set. */
+
+/* Panels where backdrop-filter is missing: solid colours with the same hue. */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+	:root { --card: #0e121c; --popover: #0e121c; --secondary: #181c29; --g-field: #090c14; }
+	:root[data-theme="light"], html.light { --card: #ffffff; --popover: #ffffff; --secondary: #eef0f6; --g-field: #ffffff; }
+}
+@media (prefers-reduced-transparency: reduce) {
+	:root { --card: #0e121c; --popover: #0e121c; --secondary: #181c29; --g-field: #090c14; --g-edge: rgb(255 255 255 / 0.20); }
+	:root[data-theme="light"], html.light { --card: #ffffff; --popover: #ffffff; --secondary: #eef0f6; --g-field: #ffffff; --g-edge: rgb(30 40 80 / 0.28); }
+}
+@media (prefers-reduced-transparency: reduce) and (prefers-color-scheme: light) {
+	:root:not([data-theme]):not(.dark) { --card: #ffffff; --popover: #ffffff; --secondary: #eef0f6; --g-field: #ffffff; --g-edge: rgb(30 40 80 / 0.28); }
 }

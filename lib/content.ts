@@ -7,7 +7,7 @@ import testimonialsJson from "@/content/testimonials.json";
 // so a bad commit from the dashboard never reaches production.
 
 export type Link = { label: string; href: string };
-export type Service = { title: string; note: string; items: string[] };
+export type Service = { title: string; note: string; items: string[]; links?: Link[] };
 export type Step = { title: string; copy: string };
 
 export type Site = {
@@ -58,6 +58,13 @@ function count(file: string, path: string, value: unknown): number {
   return value;
 }
 
+// Site-relative paths (/lab, /?topic=hosting#contact) are allowed for internal links; no protocol-relative URLs.
+function href(file: string, path: string, value: unknown): string {
+  const raw = str(file, path, value, 500);
+  if (/^\/(?!\/)/.test(raw) || /^(https:\/\/|mailto:)/.test(raw)) return raw;
+  return fail(file, path, "an https:// or mailto: URL or a /path");
+}
+
 function strList(file: string, path: string, value: unknown): string[] {
   if (!Array.isArray(value)) fail(file, path, "an array of strings");
   return value.map((item, i) => str(file, `${path}[${i}]`, item, 80));
@@ -86,7 +93,8 @@ function parseSite(raw: Record<string, unknown>): Site {
     services: list(f, "services", raw.services, (s, at) => ({
       title: str(f, `${at}.title`, s.title, 80),
       note: str(f, `${at}.note`, s.note, 200),
-      items: strList(f, `${at}.items`, s.items)
+      items: strList(f, `${at}.items`, s.items),
+      ...(s.links === undefined ? {} : { links: list(f, `${at}.links`, s.links, (l, lat) => ({ label: str(f, `${lat}.label`, l.label, 40), href: href(f, `${lat}.href`, l.href) })) })
     })),
     process: list(f, "process", raw.process, (s, at) => ({ title: str(f, `${at}.title`, s.title, 80), copy: str(f, `${at}.copy`, s.copy, 300) })),
     contactServices: strList(f, "contactServices", raw.contactServices),

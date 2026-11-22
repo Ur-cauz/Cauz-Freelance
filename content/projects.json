@@ -1,9 +1,22 @@
 [
   {
+    "name": "Rispense",
+    "description": "Safe-to-spend budgeting app for UPI users in India. The Android app is in development and the waitlist site is live.",
+    "language": "React Native",
+    "stack": [
+      "Expo",
+      "Firebase"
+    ],
+    "live": "https://rispense.app/"
+  },
+  {
     "name": "CJAM",
     "description": "Open-source ESP32 development board with three NRF24L01+ radios, built for 2.4 GHz experiments, RF learning and wireless security research.",
     "language": "Hardware",
-    "stack": ["ESP32", "PCB design"],
+    "stack": [
+      "ESP32",
+      "PCB design"
+    ],
     "stars": 2,
     "github": "https://github.com/Ur-cauz/CJAM"
   },
@@ -11,29 +24,30 @@
     "name": "Core Discord Bot",
     "description": "Discord bot for dev teams with task, bug and standup commands, analytics and a web dashboard.",
     "language": "JavaScript",
-    "stack": ["Discord bot", "Dashboard"],
+    "stack": [
+      "Discord bot",
+      "Dashboard"
+    ],
     "github": "https://github.com/Ur-cauz/Core---A-Discord-Bot"
   },
   {
     "name": "Bot Monitor Dashboard",
     "description": "Next.js dashboard and API for monitoring and controlling Termux bot processes over SSH.",
     "language": "TypeScript",
-    "stack": ["Next.js", "SSH"],
+    "stack": [
+      "Next.js",
+      "SSH"
+    ],
     "github": "https://github.com/Ur-cauz/Home-Server-Dashboard"
-  },
-  {
-    "name": "WasherOS",
-    "description": "Mobile-first Progressive Web App for car-wash operations, with session-protected routes and typed API contracts.",
-    "language": "TypeScript",
-    "stack": ["Next.js", "PWA"],
-    "live": "https://washer-os.vercel.app",
-    "github": "https://github.com/Ur-cauz/WasherOS"
   },
   {
     "name": "Cauzify",
     "description": "Mobile-first Progressive Web App music player for Navidrome servers, with a dark glass-style interface.",
     "language": "JavaScript",
-    "stack": ["PWA", "Navidrome"],
+    "stack": [
+      "PWA",
+      "Navidrome"
+    ],
     "live": "https://cauzify.vercel.app",
     "github": "https://github.com/Ur-cauz/Cauzify"
   },
@@ -41,7 +55,10 @@
     "name": "ESP32 Game Box",
     "description": "Web-controlled game system on an ESP32: six buttons and LEDs, six classic games and a debug panel over its own WiFi access point.",
     "language": "C++",
-    "stack": ["ESP32", "Embedded"],
+    "stack": [
+      "ESP32",
+      "Embedded"
+    ],
     "stars": 1,
     "github": "https://github.com/Ur-cauz/ESP32-Game-Box"
   },
@@ -49,7 +66,10 @@
     "name": "Leaderboard Discord Bot",
     "description": "Discord bot with message leaderboards, moderation commands, suggestions and a web dashboard for management.",
     "language": "JavaScript",
-    "stack": ["Discord bot", "Dashboard"],
+    "stack": [
+      "Discord bot",
+      "Dashboard"
+    ],
     "github": "https://github.com/Ur-cauz/Multi-purpose-Discord-Bot"
   }
 ]

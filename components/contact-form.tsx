@@ -23,10 +23,6 @@ function validate(data: FormData): Errors {
   return errors;
 }
 
-const input =
-  "mt-1.5 block w-full rounded border border-line-strong bg-inset px-3 py-2.5 text-base text-fg placeholder:text-faint " +
-  "transition-colors focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus)] aria-[invalid=true]:border-danger";
-
 export function ContactForm({ services, email }: { services: string[]; email: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
@@ -44,7 +40,7 @@ export function ContactForm({ services, email }: { services: string[]; email: st
   const serviceRef = useRef<HTMLSelectElement>(null);
   useEffect(() => {
     const topic = new URLSearchParams(window.location.search).get("topic");
-    const wanted = topic === "hosting" ? "Hosting on Cauz Lab" : null;
+    const wanted = topic === "hosting" ? "Hosting on C-LAB" : null;
     if (wanted && serviceRef.current && services.includes(wanted)) serviceRef.current.value = wanted;
   }, [services]);
 
@@ -94,10 +90,10 @@ export function ContactForm({ services, email }: { services: string[]; email: st
 
   if (status === "success") {
     return (
-      <div role="status" className="border-l-4 border-l-run pl-4">
-        <p className="text-2xl font-bold tracking-tight">Got it, thanks.</p>
-        <p className="mt-2 text-muted">I’ll reply to the email you gave, usually with a few questions or a time to talk.</p>
-        <button type="button" onClick={reset} className="link mt-6 text-sm font-medium">
+      <div role="status" className="banner" data-tone="ok" style={{ display: "grid", gap: 6 }}>
+        <p style={{ fontSize: 18, fontWeight: 600 }}>Got it, thanks.</p>
+        <p className="muted">I’ll reply to the email you gave, usually with a few questions or a time to talk.</p>
+        <button type="button" onClick={reset} className="link-accent" style={{ background: "none", border: 0, padding: 0, cursor: "pointer", textAlign: "left" }}>
           Send another message
         </button>
       </div>
@@ -107,29 +103,29 @@ export function ContactForm({ services, email }: { services: string[]; email: st
   const describe = (field: Field) => (errors[field] ? { "aria-invalid": true, "aria-describedby": `${field}-error` } : {});
   const errorText = (field: Field) =>
     errors[field] ? (
-      <span id={`${field}-error`} className="mt-1.5 block text-sm text-danger">
+      <span id={`${field}-error`} className="field-msg" style={{ display: "block" }}>
         {errors[field]}
       </span>
     ) : null;
 
   return (
-    <form onSubmit={submit} noValidate className="grid gap-6" aria-busy={status === "sending"}>
-      <div className="grid gap-6 sm:grid-cols-2">
+    <form onSubmit={submit} noValidate className="form" aria-busy={status === "sending"}>
+      <div className="form-row">
         <label className="block">
-          <span className="eng-label">Name</span>
-          <input name="name" autoComplete="name" maxLength={100} required className={input} {...describe("name")} />
+          <span className="field-label" style={{ display: "block" }}>Name</span>
+          <input name="name" autoComplete="name" maxLength={100} required className="input" {...describe("name")} />
           {errorText("name")}
         </label>
         <label className="block">
-          <span className="eng-label">Email</span>
-          <input name="email" type="email" autoComplete="email" inputMode="email" maxLength={254} required className={input} {...describe("email")} />
+          <span className="field-label" style={{ display: "block" }}>Email</span>
+          <input name="email" type="email" autoComplete="email" inputMode="email" maxLength={254} required className="input" {...describe("email")} />
           {errorText("email")}
         </label>
       </div>
 
       <label className="block">
-        <span className="eng-label">What do you need?</span>
-        <select ref={serviceRef} name="service" defaultValue="" required className={`${input} cursor-pointer`} {...describe("service")}>
+        <span className="field-label" style={{ display: "block" }}>What do you need?</span>
+        <select ref={serviceRef} name="service" defaultValue="" required className="select" {...describe("service")}>
           <option value="" disabled>
             Choose one
           </option>
@@ -143,7 +139,7 @@ export function ContactForm({ services, email }: { services: string[]; email: st
       </label>
 
       <label className="block">
-        <span className="eng-label">Project details</span>
+        <span className="field-label" style={{ display: "block" }}>Project details</span>
         <textarea
           name="message"
           rows={5}
@@ -151,14 +147,14 @@ export function ContactForm({ services, email }: { services: string[]; email: st
           maxLength={4000}
           required
           placeholder="What are you building, who is it for, and is there a deadline?"
-          className={`${input} resize-y`}
+          className="input"
           {...describe("message")}
         />
         {errorText("message")}
       </label>
 
       {/* Honeypot: hidden from people and assistive tech; bots fill it. */}
-      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+      <div aria-hidden="true" className="honeypot">
         <label>
           Website
           <input name="website" type="text" tabIndex={-1} autoComplete="off" defaultValue="" />
@@ -172,8 +168,8 @@ export function ContactForm({ services, email }: { services: string[]; email: st
         </>
       ) : null}
 
-      <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <button type="submit" disabled={status === "sending"} className="btn-primary w-full sm:w-auto">
+      <div className="form-foot">
+        <button type="submit" disabled={status === "sending"} className="btn btn-primary btn-lg">
           {status === "sending" ? (
             <>
               <span className="spinner" aria-hidden="true" /> Sending…
@@ -184,12 +180,12 @@ export function ContactForm({ services, email }: { services: string[]; email: st
             </>
           )}
         </button>
-        <p className="text-sm text-muted">
-          Or email <a className="link text-fg" href={`mailto:${email}`}>{email}</a>
+        <p className="muted small">
+          Or email <a className="link-accent" href={`mailto:${email}`}>{email}</a>
         </p>
       </div>
 
-      <p ref={statusRef} tabIndex={-1} role="alert" className="text-sm text-danger empty:hidden focus:outline-none">
+      <p ref={statusRef} tabIndex={-1} role="alert" className="form-alert">
         {status === "error" ? message : ""}
       </p>
     </form>

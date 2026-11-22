@@ -1,0 +1,81 @@
+/* /lab extras. Look, tokens and components come from /tokens.css and /panel.css (copied from the control panel). */
+.shell { max-width: 1240px; }
+.content > * + * { margin-top: 0; }
+.topnav { display: none; align-items: center; gap: 2px; margin-left: 8px; }
+.topnav a { display: inline-flex; align-items: center; min-height: 36px; padding: 0 12px; border-radius: 12px; color: var(--text-2); font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color 140ms, color 140ms; }
+.topnav a:hover { background: var(--muted); color: var(--text); }
+@media (min-width: 1024px) { .topnav { display: flex; } }
+@media (max-width: 639px) { .hide-sm { display: none; } .topbar-actions .btn { padding: 0 12px; } }
+
+/* brand mark (C-LAB kit): flat colours on dark, on-light colours in day mode */
+.brand-clab { width: 32px; height: 32px; flex: none; }
+.brand-clab .c { fill: #E8EDF2; } .brand-clab .l { fill: #8FB3D9; }
+:root[data-theme="light"] .brand-clab .c { fill: #1B2636; } :root[data-theme="light"] .brand-clab .l { fill: #3F6A99; }
+@media (prefers-color-scheme: light) { :root:not([data-theme]) .brand-clab .c { fill: #1B2636; } :root:not([data-theme]) .brand-clab .l { fill: #3F6A99; } }
+.brand-clab.mono { width: 18px; height: 18px; fill: currentColor; margin-right: 8px; vertical-align: -3px; }
+.brand-name { font-size: 17px; }
+
+.hero-banner { margin: 0 0 22px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: #070B12; }
+.hero-banner img { display: block; width: 100%; height: auto; }
+.lab-title { font-size: clamp(30px, 6vw, 48px); font-weight: 600; letter-spacing: -0.03em; }
+.lab-lede { max-width: 62ch; font-size: 16px; }
+.greet { gap: 12px; flex-wrap: wrap; }
+.greet .badge { height: 26px; font-size: 13px; font-weight: 600; padding: 0 11px; }
+.badge .led[data-tone="ok"]::after { animation-iteration-count: infinite; }
+.updated { margin-right: 4px; align-self: center; }
+.section-title.lg { font-size: 20px; letter-spacing: -0.015em; }
+.banner { max-width: 1180px; margin: 0; }
+.banner[data-tone="warn"] { border-color: color-mix(in srgb, var(--warn) 45%, transparent); border-left-color: var(--warn-fill); background: var(--warn-bg); }
+
+/* gauge extras (panel markup: .gauge-read > .val; caption lines) */
+.gauge-name { font-size: 13px; color: var(--text); font-weight: 500; }
+.gauge-read .val-lg .val-n { font-size: 26px; }
+.gauge-sp:empty { display: none; }
+.g-sp { stroke-width: 2.5; }
+
+/* tiles */
+.tile .val-lg .val-n { font-size: 22px; }
+.tile .tile-value { margin-top: 2px; }
+.tile .meter { margin-top: 8px; }
+.tile[data-tone="ok"]::before { background: var(--run); }
+.tile[data-tone="info"]::before { background: var(--info-fill); }
+
+/* service cards */
+.svc-grid { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.svc .panel-body { display: grid; gap: 12px; align-content: start; }
+.svc p { color: var(--text-2); font-size: 14.5px; }
+.svc .chips li { display: inline-flex; align-items: center; gap: 6px; height: 22px; padding: 0 8px; border: 1px solid var(--line); border-radius: 999px; background: var(--secondary); font-size: 12px; font-weight: 500; }
+.svc .chips .led { width: 7px; height: 7px; }
+.svc .panel-title { font-size: 15px; }
+.card-main .svc.panel { background-color: var(--inset); }
+
+.grid-2 { margin-top: var(--s6); }
+
+/* hosting CTA */
+.cta-grid { display: grid; gap: var(--s5); }
+@media (min-width: 900px) { .cta-grid { grid-template-columns: 1.2fr 1fr; align-items: start; gap: var(--s6); } }
+.cta-title { font-size: clamp(24px, 4vw, 34px); font-weight: 600; letter-spacing: -0.025em; line-height: 1.15; }
+.cta-lede { margin-top: 12px; color: var(--text-2); max-width: 54ch; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s5); }
+.btn-lg { min-height: 44px; padding: 0 20px; font-size: 15px; }
+.cta-fine { margin-top: 14px; }
+.can-host { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.can-host li { display: grid; gap: 1px; padding: 10px 14px; border: 1px solid var(--line); border-left: 3px solid var(--link); border-radius: var(--r-md); background: var(--g-field); }
+.can-host strong { font-size: 15px; font-weight: 600; }
+.can-host span { font-size: 13.5px; color: var(--text-2); }
+
+.lab-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px var(--s4); margin-top: var(--s6); padding-top: var(--s4); border-top: 1px solid var(--line); }
+.foot-brand { font-weight: 700; font-size: 13px; letter-spacing: 0.04em; }
+.lab-noscript { padding: var(--s4); }
+ul.chips { list-style: none; margin: 0; padding: 0; }
+.panel-title { margin: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* panel layout: sidebar + view inside the big card; panel.css has `.panel + .panel` margins that must not apply in grids */
+.svc-grid > .panel, .grid-2 > .panel { margin-top: 0; }
+.hero-banner { margin-top: 0; }
+.nav-title { font-size: 16px; font-weight: 600; }
+.sidebar-foot .badge { height: 22px; }
+#top { scroll-margin-top: 88px; }
+.nav-backdrop[hidden] { display: none !important; }
