@@ -98,9 +98,9 @@ function ServiceCard({ service }: { service: Service }) {
         {service.links?.length ? (
           <div className="links">
             {service.links.map((l) => (
-              <Link key={l.href} href={l.href}>
+              <a key={l.href} href={l.href}>
                 {l.label}
-              </Link>
+              </a>
             ))}
           </div>
         ) : null}
@@ -196,10 +196,10 @@ export default async function HomePage() {
                   Right now
                 </h2>
                 {live ? (
-                  <Link href="/lab" className="live-chip" aria-label={`Live: ${live.up} of ${live.total} containers up. Open the lab live view.`}>
+                  <a href="/lab" className="live-chip" aria-label={`Live: ${live.up} of ${live.total} containers up. Open the lab live view.`}>
                     <span className="led" data-tone={live.up === live.total ? "ok" : "warn"} aria-hidden="true" />
                     Live: <span className="num">{live.up}/{live.total}</span> containers up
-                  </Link>
+                  </a>
                 ) : (
                   <span className="badge">
                     <span className="led" data-tone="ok" aria-hidden="true" />
@@ -233,9 +233,9 @@ export default async function HomePage() {
                   I run my own homelab, C-LAB, and you can watch it live: media streaming, cloud storage, DNS filtering and game servers on hardware at home.
                 </p>
                 <div className="teaser-actions">
-                  <Link href="/lab" className="btn btn-primary">
+                  <a href="/lab" className="btn btn-primary">
                     Open C-LAB live view
-                  </Link>
+                  </a>
                   <Link href="/?topic=hosting&source=lab#contact" className="btn">
                     Ask about hosting
                   </Link>
@@ -344,7 +344,7 @@ export default async function HomePage() {
             </p>
             <ul>
               <li>
-                <Link href="/lab">C-LAB</Link>
+                <a href="/lab">C-LAB</a>
               </li>
               {site.socials.map((social) => (
                 <li key={social.label}>

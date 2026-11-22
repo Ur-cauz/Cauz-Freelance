@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Icon, type IconName } from "@/components/icon";
 
@@ -85,9 +84,9 @@ export function SidebarNav({ groups, footer }: { groups: NavGroup[]; footer?: Re
                     {inner}
                   </a>
                 ) : (
-                  <Link key={i.label} className="nav-link" href={i.href}>
+                  <a key={i.label} className="nav-link" href={i.href}>
                     {inner}
-                  </Link>
+                  </a>
                 );
               })}
             </div>
