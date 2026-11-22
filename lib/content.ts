@@ -30,6 +30,8 @@ export type Project = {
   name: string;
   description: string;
   stack: string[];
+  language?: string;
+  stars?: number;
   live?: string;
   github?: string;
 };
@@ -49,6 +51,11 @@ function url(file: string, path: string, value: unknown): string {
   const raw = str(file, path, value, 500);
   if (!/^(https:\/\/|mailto:)/.test(raw)) fail(file, path, "an https:// or mailto: URL");
   return raw;
+}
+
+function count(file: string, path: string, value: unknown): number {
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 0 || value > 1_000_000) fail(file, path, "a non-negative integer");
+  return value;
 }
 
 function strList(file: string, path: string, value: unknown): string[] {
@@ -100,6 +107,8 @@ export const projects: Project[] = list("projects.json", "projects", projectsJso
   name: str("projects.json", `${at}.name`, p.name, 80),
   description: str("projects.json", `${at}.description`, p.description, 400),
   stack: strList("projects.json", `${at}.stack`, p.stack),
+  ...(p.language === undefined ? {} : { language: str("projects.json", `${at}.language`, p.language, 40) }),
+  ...(p.stars === undefined ? {} : { stars: count("projects.json", `${at}.stars`, p.stars) }),
   ...(p.live === undefined ? {} : { live: url("projects.json", `${at}.live`, p.live) }),
   ...(p.github === undefined ? {} : { github: url("projects.json", `${at}.github`, p.github) })
 }));

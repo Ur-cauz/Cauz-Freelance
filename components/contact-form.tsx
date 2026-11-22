@@ -24,8 +24,8 @@ function validate(data: FormData): Errors {
 }
 
 const input =
-  "block w-full rounded-none border-0 border-b border-line bg-transparent px-0 py-3 text-base text-fg placeholder:text-muted/70 " +
-  "transition-colors focus:border-accent focus:shadow-[0_1px_0_0_rgb(var(--accent))] focus:outline-none focus:ring-0 aria-[invalid=true]:border-danger";
+  "mt-1.5 block w-full rounded border border-line-strong bg-inset px-3 py-2.5 text-base text-fg placeholder:text-faint " +
+  "transition-colors focus:border-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--focus)] aria-[invalid=true]:border-danger";
 
 export function ContactForm({ services, email }: { services: string[]; email: string }) {
   const [status, setStatus] = useState<Status>("idle");
@@ -94,8 +94,8 @@ export function ContactForm({ services, email }: { services: string[]; email: st
 
   if (status === "success") {
     return (
-      <div role="status" className="border-t border-fg pt-6">
-        <p className="text-2xl font-semibold tracking-tight">Got it, thanks.</p>
+      <div role="status" className="border-l-4 border-l-run pl-4">
+        <p className="text-2xl font-bold tracking-tight">Got it, thanks.</p>
         <p className="mt-2 text-muted">I’ll reply to the email you gave, usually with a few questions or a time to talk.</p>
         <button type="button" onClick={reset} className="link mt-6 text-sm font-medium">
           Send another message
@@ -116,19 +116,19 @@ export function ContactForm({ services, email }: { services: string[]; email: st
     <form onSubmit={submit} noValidate className="grid gap-6" aria-busy={status === "sending"}>
       <div className="grid gap-6 sm:grid-cols-2">
         <label className="block">
-          <span className="text-sm font-medium">Name</span>
+          <span className="eng-label">Name</span>
           <input name="name" autoComplete="name" maxLength={100} required className={input} {...describe("name")} />
           {errorText("name")}
         </label>
         <label className="block">
-          <span className="text-sm font-medium">Email</span>
+          <span className="eng-label">Email</span>
           <input name="email" type="email" autoComplete="email" inputMode="email" maxLength={254} required className={input} {...describe("email")} />
           {errorText("email")}
         </label>
       </div>
 
       <label className="block">
-        <span className="text-sm font-medium">What do you need?</span>
+        <span className="eng-label">What do you need?</span>
         <select ref={serviceRef} name="service" defaultValue="" required className={`${input} cursor-pointer`} {...describe("service")}>
           <option value="" disabled>
             Choose one
@@ -143,7 +143,7 @@ export function ContactForm({ services, email }: { services: string[]; email: st
       </label>
 
       <label className="block">
-        <span className="text-sm font-medium">Project details</span>
+        <span className="eng-label">Project details</span>
         <textarea
           name="message"
           rows={5}

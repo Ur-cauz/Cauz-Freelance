@@ -24,7 +24,9 @@ An array, shown top to bottom in "Selected work".
 |---------------|------------|----------|------------|------------------------------------|
 | `name`        | string     | yes      | 80 chars   |                                    |
 | `description` | string     | yes      | 400 chars  | One or two sentences.              |
-| `stack`       | string[]   | yes      | 80 each    | First 3 are shown.                 |
+| `stack`       | string[]   | yes      | 80 each    | First 2 are shown as tags.         |
+| `language`    | string     | no       | 40 chars   | Main language chip.                |
+| `stars`       | integer    | no       |            | GitHub stars; shown when above 0.  |
 | `live`        | URL        | no       |            | Live site. Omit if there is none.  |
 | `github`      | URL        | no       |            | Source code.                       |
 
@@ -62,3 +64,6 @@ A single object.
 | `contactServices` | string[]                               | Options in the form's "What do you need?" select. The API only accepts these values. |
 | `footerNote`      | string (200)                           | Small print in the footer.                         |
 | `seo`             | `{ title, description, url, ogImage, ogImageAlt }` | Page title, meta description, canonical URL and Open Graph image. |
+
+
+The project list is curated by hand from the public GitHub repos (no forks, archives, tutorials, tiny or private repos). Do not add private repos or their names.

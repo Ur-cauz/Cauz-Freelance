@@ -1,53 +1,55 @@
 [
   {
+    "name": "CJAM",
+    "description": "Open-source ESP32 development board with three NRF24L01+ radios, built for 2.4 GHz experiments, RF learning and wireless security research.",
+    "language": "Hardware",
+    "stack": ["ESP32", "PCB design"],
+    "stars": 2,
+    "github": "https://github.com/Ur-cauz/CJAM"
+  },
+  {
+    "name": "Core Discord Bot",
+    "description": "Discord bot for dev teams with task, bug and standup commands, analytics and a web dashboard.",
+    "language": "JavaScript",
+    "stack": ["Discord bot", "Dashboard"],
+    "github": "https://github.com/Ur-cauz/Core---A-Discord-Bot"
+  },
+  {
+    "name": "Bot Monitor Dashboard",
+    "description": "Next.js dashboard and API for monitoring and controlling Termux bot processes over SSH.",
+    "language": "TypeScript",
+    "stack": ["Next.js", "SSH"],
+    "github": "https://github.com/Ur-cauz/Home-Server-Dashboard"
+  },
+  {
     "name": "WasherOS",
-    "description": "A streamlined site for WasherOS with a simple public-facing flow and a clean deployment-ready presence.",
-    "stack": ["JavaScript", "Vercel", "Web UI", "Frontend"],
+    "description": "Mobile-first Progressive Web App for car-wash operations, with session-protected routes and typed API contracts.",
+    "language": "TypeScript",
+    "stack": ["Next.js", "PWA"],
     "live": "https://washer-os.vercel.app",
     "github": "https://github.com/Ur-cauz/WasherOS"
   },
   {
-    "name": "Luminote",
-    "description": "A real-time note-taking app with collaborative editing, Markdown support, and AI-generated summaries.",
-    "stack": ["Collaboration", "Notes", "AI", "Realtime UX"],
-    "live": "https://luminote.vercel.app",
-    "github": "https://github.com/Ur-cauz/Luminote"
+    "name": "Cauzify",
+    "description": "Mobile-first Progressive Web App music player for Navidrome servers, with a dark glass-style interface.",
+    "language": "JavaScript",
+    "stack": ["PWA", "Navidrome"],
+    "live": "https://cauzify.vercel.app",
+    "github": "https://github.com/Ur-cauz/Cauzify"
   },
   {
     "name": "ESP32 Game Box",
-    "description": "A web-based interactive game controller for ESP32, with physical buttons, LEDs, and a mobile-friendly control layer.",
-    "stack": ["C++", "Hardware", "Responsive UI", "Embedded"],
+    "description": "Web-controlled game system on an ESP32: six buttons and LEDs, six classic games and a debug panel over its own WiFi access point.",
+    "language": "C++",
+    "stack": ["ESP32", "Embedded"],
+    "stars": 1,
     "github": "https://github.com/Ur-cauz/ESP32-Game-Box"
   },
   {
-    "name": "MHSCU Tools",
-    "description": "A small utility-focused project built to keep common tasks and student workflows a little more manageable.",
-    "stack": ["JavaScript", "Utilities", "Productivity", "Web"],
-    "github": "https://github.com/Ur-cauz/MHSCU-Tools"
-  },
-  {
-    "name": "Discord Bot For Freelancer",
-    "description": "A practical Discord bot made to help freelancers protect their work and keep project communication under control.",
-    "stack": ["JavaScript", "Discord Bot", "Automation", "Workflow"],
-    "github": "https://github.com/Ur-cauz/Discord-Bot-For-Freelancer"
-  },
-  {
-    "name": "CJAM",
-    "description": "A compact ESP32 development board designed for 2.4 GHz experimentation, embedded development, RF learning, and wireless security research.",
-    "stack": ["C++", "Hardware", "PCB design", "Creative engineering"],
-    "github": "https://github.com/Ur-cauz/CJAM"
-  },
-  {
-    "name": "4-bit ALU",
-    "description": "A hands-on digital-logic build exploring how arithmetic and control work below the software layer — designed, wired, tested, and debugged one signal at a time.",
-    "stack": ["Digital logic", "Circuit design", "Hardware", "Engineering"],
-    "github": "https://github.com/Ur-cauz/4bitALU"
-  },
-  {
-    "name": "GTVIWEBPAGE",
-    "description": "A polished landing page for the GTA WebPage project, with a live deployment and a straightforward visual direction.",
-    "stack": ["JavaScript", "Landing Page", "Vercel", "UI"],
-    "live": "https://gtawebpage.vercel.app",
-    "github": "https://github.com/Ur-cauz/GTVIWEBPAGE"
+    "name": "Leaderboard Discord Bot",
+    "description": "Discord bot with message leaderboards, moderation commands, suggestions and a web dashboard for management.",
+    "language": "JavaScript",
+    "stack": ["Discord bot", "Dashboard"],
+    "github": "https://github.com/Ur-cauz/Multi-purpose-Discord-Bot"
   }
 ]

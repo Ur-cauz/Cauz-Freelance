@@ -1,22 +1,34 @@
 /** @type {import('tailwindcss').Config} */
+// Colours come from /tokens.css (shared with /lab). They are plain hex variables, so Tailwind
+// opacity modifiers (bg-x/50) are not available on these names; use the panel tokens instead.
 const config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: "rgb(var(--bg) / <alpha-value>)",
-        fg: "rgb(var(--fg) / <alpha-value>)",
-        muted: "rgb(var(--muted) / <alpha-value>)",
-        line: "rgb(var(--line) / <alpha-value>)",
-        accent: "rgb(var(--accent) / <alpha-value>)",
-        "accent-ink": "rgb(var(--accent-ink) / <alpha-value>)",
-        danger: "rgb(var(--danger) / <alpha-value>)"
+        bg: "var(--bg)",
+        "bg-2": "var(--bg-2)",
+        panel: "var(--panel)",
+        "panel-2": "var(--panel-2)",
+        "panel-3": "var(--panel-3)",
+        inset: "var(--inset)",
+        fg: "var(--text)",
+        muted: "var(--text-2)",
+        faint: "var(--text-3)",
+        line: "var(--line)",
+        "line-strong": "var(--line-strong)",
+        accent: "var(--accent)",
+        "accent-ink": "var(--accent)",
+        primary: "var(--primary-bg)",
+        run: "var(--run)",
+        danger: "var(--crit)"
       },
       fontFamily: {
-        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"]
+        sans: ["var(--font)"],
+        mono: ["var(--mono)"]
       },
       maxWidth: {
-        page: "72rem"
+        page: "70rem"
       }
     }
   },

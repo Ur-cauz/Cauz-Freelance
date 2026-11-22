@@ -41,9 +41,9 @@
   "footerNote": "Man idk why i built this, but here you go. Hope this does the work well. >''< :p",
   "seo": {
     "title": "Cauz | Developer and Electrical Engineering Student",
-    "description": "pfftttt click on it to view ig >''<",
+    "description": "Cauz builds websites, web apps, Discord and Telegram bots and embedded hardware, and runs a self-hosted homelab with a live status page. Start a project or ask about hosting.",
     "url": "https://cauz.is-a.dev",
-    "ogImage": "https://i.ibb.co/4RM4G8cD/cauzsfjasdhkashgajkshgjaks.jpg",
-    "ogImageAlt": "Cauz — developer and electrical engineering student"
+    "ogImage": "https://cauz.is-a.dev/og.png",
+    "ogImageAlt": "Cauz: developer and electrical engineering student. Websites, bots and hardware."
   }
 }
