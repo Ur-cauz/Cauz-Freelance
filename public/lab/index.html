@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="/tokens.css">
   <link rel="stylesheet" href="/panel.css">
   <link rel="stylesheet" href="/lab/lab.css">
+  <link rel="stylesheet" href="/lab/hosting.css">
   <script src="/lab/app.js" defer></script>
 </head>
 <body>
@@ -67,7 +68,7 @@
           <div class="nav-group">
             <div class="nav-group-label">The lab</div>
             <a class="nav-link" href="#specs" data-spy="specs"><span data-icon="layers"></span><span>Hardware</span></a>
-            <a class="nav-link" href="#host" data-spy="host"><span data-icon="code"></span><span>Host with us</span></a>
+            <a class="nav-link" href="#services" data-spy="services"><span data-icon="code"></span><span>Host with us</span></a>
           </div>
           <div class="nav-group">
             <div class="nav-group-label">More</div>
@@ -97,6 +98,28 @@
             <a class="btn" href="#runs">See what runs here</a>
           </div>
         </header>
+
+      <section class="hosting" id="services" aria-labelledby="hosting-title">
+        <div class="hosting-hero">
+          <p class="hosting-kicker">C-LAB / Independent hosting</p>
+          <h2 id="hosting-title">Small projects.<br>Proper attention.</h2>
+          <p class="hosting-intro">A home for your community, your bot, or the thing you finally shipped. Personally managed hosting from my home lab, with a direct line to the person running it.</p>
+          <div class="hosting-actions"><a class="hosting-primary" href="/?topic=hosting&amp;source=lab#contact">Tell me what you’re building ↗</a><a href="#status">Explore the live lab ↓</a></div>
+          <p class="hosting-note">Small-scale hosting · Enquiries open · Availability confirmed per project</p>
+        </div>
+        <div class="hosting-heading"><p class="hosting-kicker">01 / Find your fit</p><h2>Bring the idea.<br>I’ll help with the server.</h2><p>Choose a starting point. We’ll agree on resources, setup, support and a monthly quote before anything goes live.</p></div>
+        <div class="hosting-grid">
+          <article><span>01 / PLAY</span><h3>Your world. Your people.</h3><p>Minecraft hosting for a small group or community. Get help with the initial setup, whitelist and your preferred mods.</p><ul><li>Private community servers</li><li>Modpack compatibility reviewed first</li><li>Backup and resource plan agreed upfront</li></ul><a href="/?topic=hosting&amp;source=lab#contact">Ask about game hosting ↗</a></article>
+          <article><span>02 / AUTOMATE</span><h3>Give your bot a home.</h3><p>A place for Discord bots, scheduled jobs and lightweight automations that shouldn’t depend on your laptop staying open.</p><ul><li>Node.js and Python projects</li><li>Help with deployment and configuration</li><li>Resource limits suited to your workload</li></ul><a href="/?topic=hosting&amp;source=lab#contact">Ask about bot hosting ↗</a></article>
+          <article><span>03 / PUBLISH</span><h3>Make your little corner.</h3><p>Hosting for portfolios, landing pages and small websites, with help getting your project onto its own domain.</p><ul><li>Static sites and lightweight web apps</li><li>Domain and HTTPS setup scoped together</li><li>Updates and maintenance by agreement</li></ul><a href="/?topic=hosting&amp;source=lab#contact">Ask about website hosting ↗</a></article>
+          <article><span>04 / BUILD</span><h3>Something worth showing.</h3><p>A staging environment for your next app, a client demo or a private dashboard. Share progress before the big launch.</p><ul><li>Small APIs and containerized apps</li><li>Access requirements reviewed together</li><li>Short-term projects welcome</li></ul><a href="/?topic=hosting&amp;source=lab#contact">Ask about app hosting ↗</a></article>
+          <article><span>05 / EXPERIMENT</span><h3>A little extra compute.</h3><p>Lightweight Docker builds and development jobs, considered individually according to capacity and isolation needs.</p><ul><li>Reviewed projects only</li><li>Scheduled jobs with agreed limits</li><li>Availability on request</li></ul><a href="/?topic=hosting&amp;source=lab#contact">Discuss a build workload ↗</a></article>
+          <aside><p class="hosting-kicker">Built for a good fit</p><h3>Small on purpose.</h3><p>This is an independently operated home lab. It suits hobby projects, small communities and experiments with flexible uptime needs.</p><p>Tell me your stack, expected usage and budget. I’ll confirm whether the lab can support it.</p><a href="/?topic=hosting&amp;source=lab#contact">Let’s find out ↗</a></aside>
+        </div>
+        <div class="hosting-process"><div><span>01 / Tell me</span><h3>Share the project.</h3><p>What it runs, who uses it, and what you need help with.</p></div><div><span>02 / Scope it</span><h3>Agree on the details.</h3><p>Capacity, pricing, backups and support are confirmed before you commit.</p></div><div><span>03 / Settle in</span><h3>Launch together.</h3><p>We check the deployment and agree how updates and support will work.</p></div></div>
+        <details class="hosting-faq"><summary>What should I know before enquiring?</summary><p>The lab runs on a residential connection and a single workstation. Maintenance, power or connectivity interruptions can happen; there is no enterprise uptime guarantee. Backup retention, recovery arrangements and support hours are agreed for each project. You can request a copy of your project data when leaving.</p></details>
+        <div class="hosting-heading"><p class="hosting-kicker">02 / Behind the scenes</p><h2>The lab, in the open.</h2><p>Explore the existing read-only dashboard below. It shows published lab snapshots; it is not a customer uptime guarantee.</p></div>
+      </section>
 
         <section class="panel" aria-labelledby="gauges-title">
           <div class="panel-head"><h2 class="panel-title" id="gauges-title">Host telemetry</h2><span class="muted small">Live, setpoints W / C</span></div>
